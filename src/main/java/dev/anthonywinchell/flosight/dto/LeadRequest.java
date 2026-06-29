@@ -1,8 +1,9 @@
-package dto;
+package dev.anthonywinchell.flosight.dto;
 
-import enums.ProjectType;
+import dev.anthonywinchell.flosight.enums.ProjectType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,10 +23,10 @@ public class LeadRequest {
     @NotBlank
     private String phone;
 
-    @NotBlank
+    @NotNull
     private LocalDate projectDate;
 
-    @NotBlank
+    @NotNull
     private ProjectType projectType;
 
     @NotBlank

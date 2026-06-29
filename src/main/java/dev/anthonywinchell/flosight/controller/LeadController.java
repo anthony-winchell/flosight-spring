@@ -1,11 +1,11 @@
-package controller;
+package dev.anthonywinchell.flosight.controller;
 
-import dto.LeadRequest;
-import entity.Lead;
+import dev.anthonywinchell.flosight.dto.LeadRequest;
+import dev.anthonywinchell.flosight.entity.Lead;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.LeadService;
+import dev.anthonywinchell.flosight.service.LeadService;
 
 @RestController
 @RequestMapping("/api/leads")

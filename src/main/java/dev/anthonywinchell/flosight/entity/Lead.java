@@ -1,7 +1,7 @@
-package entity;
+package dev.anthonywinchell.flosight.entity;
 
-import enums.LeadStatus;
-import enums.ProjectType;
+import dev.anthonywinchell.flosight.enums.LeadStatus;
+import dev.anthonywinchell.flosight.enums.ProjectType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

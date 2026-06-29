@@ -1,9 +1,9 @@
-package service;
+package dev.anthonywinchell.flosight.service;
 
-import dto.LeadRequest;
-import entity.Lead;
+import dev.anthonywinchell.flosight.dto.LeadRequest;
+import dev.anthonywinchell.flosight.entity.Lead;
 import org.springframework.stereotype.Service;
-import repository.LeadRepository;
+import dev.anthonywinchell.flosight.repository.LeadRepository;
 
 @Service
 public class LeadService {

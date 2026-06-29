@@ -1,4 +1,4 @@
-package enums;
+package dev.anthonywinchell.flosight.enums;
 
 public enum LeadStatus {
     NEW,
