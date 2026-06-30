@@ -5,6 +5,7 @@ import dev.anthonywinchell.flosight.dto.LeadResponse;
 import dev.anthonywinchell.flosight.dto.UpdateStatusRequest;
 import dev.anthonywinchell.flosight.enums.LeadStatus;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import dev.anthonywinchell.flosight.service.LeadService;
@@ -24,36 +25,36 @@ public class LeadController {
 
     @PostMapping("/leads")
     public ResponseEntity<LeadResponse> createLead(@Valid @RequestBody LeadRequest leadRequest){
-        return ResponseEntity.ok(leadService.createLead(leadRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(leadService.createLead(leadRequest));
     }
 
     @GetMapping("/admin/leads")
-    public List<LeadResponse> getLeads(
+    public ResponseEntity<List<LeadResponse>> getLeads(
             @RequestParam(required = false) LeadStatus status
     ){
-        if(status != null){
-            return leadService.getLeadsByStatus(status);
-        } else {
-            return leadService.getAllLeads();
-        }
+        List<LeadResponse> leads = (status != null) ?
+                leadService.getLeadsByStatus(status) :
+                leadService.getAllLeads();
+        return ResponseEntity.ok(leads);
     }
 
     @GetMapping("/admin/leads/{id}")
-    public LeadResponse getLead(@PathVariable Long id) {
-        return leadService.getLeadById(id);
+    public ResponseEntity<LeadResponse> getLead(@PathVariable Long id) {
+        return ResponseEntity.ok(leadService.getLeadById(id));
     }
 
     @PatchMapping("/admin/leads/{id}/status")
-    public LeadResponse updateStatus(
+    public ResponseEntity<LeadResponse> updateStatus(
             @PathVariable Long id,
-            @RequestBody UpdateStatusRequest updateStatusRequest
+            @Valid @RequestBody UpdateStatusRequest updateStatusRequest
     ) {
-        return leadService.updateStatus(updateStatusRequest, id);
+        return ResponseEntity.ok(leadService.updateStatus(updateStatusRequest, id));
     }
 
     @DeleteMapping("/admin/leads/{id}")
-    public void deleteLead(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLead(@PathVariable Long id) {
         leadService.deleteLead(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
