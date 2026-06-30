@@ -1,42 +1,29 @@
 package dev.anthonywinchell.flosight.dto;
 
+import dev.anthonywinchell.flosight.enums.LeadStatus;
 import dev.anthonywinchell.flosight.enums.ProjectType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class LeadRequest {
+@AllArgsConstructor
+@Builder
+public class LeadResponse {
 
-    @NotBlank
+    private Long id;
     private String fullName;
-
-    @Email
-    @NotBlank
     private String email;
-
-    @NotBlank
     private String phone;
-
-    @NotNull
     private LocalDate projectDate;
-
-    @NotNull
     private ProjectType projectType;
-
-    @NotBlank
     private String projectDescription;
-
-    @NotBlank
     private String projectLocation;
-
-    @NotBlank
     private String projectBudget;
+    private LeadStatus status;
+    private LocalDateTime createdAt;
+
 }

@@ -1,5 +1,6 @@
 package dev.anthonywinchell.flosight.entity;
 
+import dev.anthonywinchell.flosight.dto.LeadRequest;
 import dev.anthonywinchell.flosight.enums.LeadStatus;
 import dev.anthonywinchell.flosight.enums.ProjectType;
 import jakarta.persistence.*;
