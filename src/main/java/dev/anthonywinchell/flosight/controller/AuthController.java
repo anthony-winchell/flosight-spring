@@ -1,6 +1,7 @@
 package dev.anthonywinchell.flosight.controller;
 
 import dev.anthonywinchell.flosight.dto.LoginRequest;
+import dev.anthonywinchell.flosight.dto.LoginResponse;
 import dev.anthonywinchell.flosight.security.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid
+    public ResponseEntity<LoginResponse> login(@Valid
                                    @RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
     }

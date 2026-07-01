@@ -1,27 +1,35 @@
 package dev.anthonywinchell.flosight.security;
 
 import dev.anthonywinchell.flosight.dto.LoginRequest;
+import dev.anthonywinchell.flosight.dto.LoginResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
-    public AuthService(AuthenticationManager authenticationManager) {
+    public AuthService(AuthenticationManager authenticationManager, JwtService jwtService) {
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
-    public String login(LoginRequest loginRequest) {
-        authenticationManager.authenticate(
+    public LoginResponse login(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
                         loginRequest.getPassword()
                 )
         );
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        return "Login successful";
+        String token = jwtService.generateToken(userDetails);
+
+        return new LoginResponse(token);
     }
 }
