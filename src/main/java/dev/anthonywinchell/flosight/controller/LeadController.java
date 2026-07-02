@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
 public class LeadController {
 
     private final LeadService leadService;
@@ -26,35 +25,6 @@ public class LeadController {
     @PostMapping("/leads")
     public ResponseEntity<LeadResponse> createLead(@Valid @RequestBody LeadRequest leadRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(leadService.createLead(leadRequest));
-    }
-
-    @GetMapping("/admin/leads")
-    public ResponseEntity<List<LeadResponse>> getLeads(
-            @RequestParam(required = false) LeadStatus status
-    ){
-        List<LeadResponse> leads = (status != null) ?
-                leadService.getLeadsByStatus(status) :
-                leadService.getAllLeads();
-        return ResponseEntity.ok(leads);
-    }
-
-    @GetMapping("/admin/leads/{id}")
-    public ResponseEntity<LeadResponse> getLead(@PathVariable Long id) {
-        return ResponseEntity.ok(leadService.getLeadById(id));
-    }
-
-    @PatchMapping("/admin/leads/{id}/status")
-    public ResponseEntity<LeadResponse> updateStatus(
-            @PathVariable Long id,
-            @Valid @RequestBody UpdateStatusRequest updateStatusRequest
-    ) {
-        return ResponseEntity.ok(leadService.updateStatus(updateStatusRequest, id));
-    }
-
-    @DeleteMapping("/admin/leads/{id}")
-    public ResponseEntity<Void> deleteLead(@PathVariable Long id) {
-        leadService.deleteLead(id);
-        return ResponseEntity.noContent().build();
     }
 
 }
